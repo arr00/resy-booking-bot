@@ -109,7 +109,8 @@ object ResyApi extends Logging {
         createHeaders(resyKeys) ++ Seq(
           "Content-Type" -> "application/x-www-form-urlencoded",
           "Origin"       -> "https://widgets.resy.com",
-          "Referer"      -> "https://widgets.resy.com/"
+          "Referer"      -> "https://widgets.resy.com/",
+          "User-Agent"    -> "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0"
         ): _*
       )
       .post(post)
@@ -119,7 +120,8 @@ object ResyApi extends Logging {
   private[this] def createHeaders(resyKeys: ResyKeys): Seq[(String, String)] = {
     Seq(
       "Authorization"     -> s"""ResyAPI api_key="${resyKeys.apiKey}"""",
-      "x-resy-auth-token" -> resyKeys.authToken
+      "X-Resy-Auth-Token" -> resyKeys.authToken,
+      "X-Resy-Universal-Auth" -> resyKeys.authToken
     )
   }
 
